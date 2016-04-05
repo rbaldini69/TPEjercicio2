@@ -1,52 +1,62 @@
 <?php
 	
 	
-	if(isset($_GET['rectangulo']))
+	if(isset($_GET["rectangulo"]))
 	{
-		$largo=$_GET['largo'];
-		$ancho=$_GET['ancho'];
+		if(!empty($_GET["largo"]) && !empty($_GET["ancho"]) ){
+		$largo=$_GET["largo"];
+		$ancho=$_GET["ancho"];
 		$rectangulo=(($largo*2)+($ancho)*2)*3;
 		$muestro="deberia llevar : ".$rectangulo." metros de alambre.";
-		$metrosCuadrados=$largo*$ancho*2;
-		$Cemento=round($metrosCuadrados,0,PHP_ROUND_HALF_UP);
-		$cal=round($metrosCuadrados,0,PHP_ROUND_HALF_UP)*3;
-		$materiales="";
-		$ArrayMateriales = array(2,4,"D");
-		
-
-
-		include"index.html";
-		unset($_GET['radio']);
+		}
+		else
+		{
+			echo "Ingrese largo y ancho del rectangulo";
+		}
+		include"index.php";
+		unset($_GET["radio"]);
 	}
-	if(isset($_GET['circunsferencia']))
-	{
-		$radio=$_GET['radio'];
+	if(isset($_GET["circunsferencia"])){
+		if(!empty($_GET["radio"])){
+		$radio=$_GET["radio"];
 		$pi=3.14;
-		$cirunsferencia= $pi * $radio * $radio*3;
-		$muestro="deberia llevar : ".$cirunsferencia." metros de alambre.";
-		$cemento=round($rectangulo)*2;
-		$cal=round($rectangulo)*3;
-		$materiales="";
-		include"index.html";
+		$circunsferencia= $pi * $radio * $radio*3;
+		$muestro="deberia llevar : ".$circunsferencia." metros de alambre.";
+		
+		}
+		else{
+			echo "Ingrese el radio";
+		}
+		//unset($_GET[$largo]);
+		//unset($_GET[$ancho]);
+		include"index.php";
 		//unset($_GET['largo']);
 		//unset($_['ancho']);
 
 
 	}
-	if (isset($_GET['Contrapiso'])) {
-			if (!isset($GET['radio'])) {
-				$radio=$_GET['radio'];
-		$pi=3.14;
-		$cirunsferencia= $pi * $radio * $radio*3;
-		$muestro="deberia llevar : ".$cirunsferencia." metros de alambre.";
-		$cemento=round($rectangulo)*2;
-		$cal=round($rectangulo)*3;
-		
-		}
+	if (isset($_GET["Contrapiso"])) {
+			if (empty($_GET["radio"])&& !empty($_GET["largo"])&& !empty($_GET["ancho"])) {
+				$largo=$_GET["largo"];
+				$ancho=$_GET["ancho"];
+				$rectangulo=(($largo*2)+($ancho*2))*3;
+				$metrosCuadrados=$largo*$ancho*2;
+				$cemento=round($metrosCuadrados,0,PHP_ROUND_HALF_UP)*2;
+				$cal=round($metrosCuadrados,0,PHP_ROUND_HALF_UP)*3;
+				$muestro="deberia llevar : ".$rectangulo." metros de alambre. ".$cemento." bolsas de cemento y ".$cal." bolsas de cal.";
+				include "index.php";
+				}
 		else
 		{
-			$Cemento;
-			include"index.html";
+			$radio=$_GET["radio"];
+			$pi=3.14;
+			$circunsferencia= $pi * $radio * $radio*3;
+			$cemento=round($circunsferencia,0,PHP_ROUND_HALF_UP)*2;
+			$cal=round($circunsferencia,0,PHP_ROUND_HALF_UP)*3;
+			
+			
+			$muestro="deberia llevar : ".$circunsferencia." metros de alambre. ".$cemento."	 bolsas de cemento y ".$cal." bolsas de cal.";
+			include "index.php";
 		}
 //			$muestro=$muestro." ".$Cemento." bolsas de cemento y ".$cal." bolsas de cal";
 
@@ -54,7 +64,7 @@
 		//unset($_GET['largo']);
 		//unset($_['ancho']);
 		//unset($_GET['radio']);
-		}s
+		}
 
 
 	
